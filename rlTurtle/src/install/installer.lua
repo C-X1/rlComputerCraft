@@ -1,24 +1,28 @@
-print("Welcome to installer/Updater")
- 
-print("Checking for existing rlTurtle API")
-print("\n")
-if(fs.exists("rlTurtle")) then
-    fs.delete("rlTurtle")
-    print("deleted...\n\n")
+function deleteIfExists(filename)
+  if(fs.exists(filename)) then
+      fs.delete(filename)
+      print("Existing " .. filename .. "deleted...\n\n")
+  end
 end
- 
-if(fs.exists("rlOccSense")) then
-    fs.delete("rlOccSense")
-    print("deleted...\n\n")
+
+function processList(list)
+  for n1,e in pairs(list) do
+  
+    
+   deleteIfExists(e[1])
+   shell.run("pastebin get " .. e[2] .." ".. e[1])
+  end
 end
+
+
+local fileList=
+{
+  {"rlTurtle", "jc7qbrB3"}
+ ,{"rlOccSense", "X84zRFWN"} 
+}
+
+print("Welcome to RL installer/Updater")
  
-print("Downloading new rlTurtle API...")
-shell.run("pastebin get jc7qbrB3 rlTurtle")
- 
-print("Downloading new rlOccSense API...")
-shell.run("pastebin get X84zRFWN rlOccSense")
- 
---print("Cleaning myself up...\n")
---me=shell.getRunningProgram()
---fs.delete(me)
+processList(fileList)
+
 print("Done!")
