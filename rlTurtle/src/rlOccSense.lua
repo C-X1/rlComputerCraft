@@ -1,6 +1,6 @@
 os.loadAPI("ocs/apis/sensor")
 
-function SensChestfilterByPos(sensor_location,x,y,z)
+function filterByPos(sensor_location,x,y,z)
 
   local s = sensor.wrap(sensor_location)
 
@@ -47,9 +47,9 @@ function SensChestfilterByPos(sensor_location,x,y,z)
   return nil
 end
 
-function SensChestGetInventoryPercentFull(sensor_location,x,y,z)
+function  getInventoryPercentFull(sensor_location,x,y,z)
   
-  D=SensChestfilterByPos(sensor_location,x,y,z)
+  D=filterByPos(sensor_location,x,y,z)
   
   if(D==nil) then
     return nil
@@ -59,6 +59,20 @@ function SensChestGetInventoryPercentFull(sensor_location,x,y,z)
   for dataName, dataValue in pairs(D) do
     if(dataName=="InventoryPercentFull")then
       return dataValue
+    end
+  end
+end
+
+function printInRange(sensor_location)
+  local s = sensor.wrap(sensor_location)
+
+  for chestHR, data in pairs(s.getTargets()) do
+
+    isDefChest=true
+    for dataName, dataValue in pairs(data) do
+        if(dataName=="RawName")then
+          print(dataValue .. ":  " .. chestHR) 
+        end
     end
   end
 end
