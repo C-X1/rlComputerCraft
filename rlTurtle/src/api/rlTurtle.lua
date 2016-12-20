@@ -9,7 +9,7 @@ local inited=false
 -- (3)_____Z(1=
 --    (2)
 --
-dirR=
+dir=
 {
   Xp=0,
   Zp=1,
@@ -79,7 +79,7 @@ data=
      DimensionalAnchorID=1001
   },
   
-  dir=dirR.Xp,
+  dir=dir.Xp,
   
   position=
   {
@@ -160,8 +160,6 @@ end
 function move(how)
   result=false
   
-  
-  
   if(mv.front==how)then
     result=turtle.forward()
   elseif(mv.back==how)then
@@ -186,7 +184,7 @@ function move(how)
       elseif(data.dir==dir.Zp)then
         data.position.z=data.position.z+1
       elseif(data.dir==dir.Zn)then
-        data.position.z=data.position.z+1
+        data.position.z=data.position.z-1
       end
     elseif(mv.back==how)then
       if(data.dir==dir.Xp)then
@@ -203,25 +201,25 @@ function move(how)
     elseif(mv.down==how)then
       data.position.y=data.position.y-1
     elseif(mv.tLeft==how)then
-      if(data.dirR==dirR.Xp)then
-          data.dirR=dirR.Zp
-      elseif(data.dirR==dirR.Zp)then
-          data.dirR=dirR.Xn
-      elseif(data.dirR==dirR.Xn)then
-          data.dirR=dirR.Zn
-      elseif(data.dirR==dirR.Zn)then
-          data.dirR=dirR.Xp
+      if(data.dir==dir.Xp)then
+          data.dir=dir.Zp
+      elseif(data.dir==dir.Zp)then
+          data.dir=dir.Xn
+      elseif(data.dir==dir.Xn)then
+          data.dir=dir.Zn
+      elseif(data.dir==dir.Zn)then
+          data.dir=dir.Xp
       end    
   
     elseif(mv.tRight==how)then
-      if(data.dirR==dirR.Xp)then
-          data.dirR=dirR.Zn
-      elseif(data.dirR==dirR.Zp)then
-          data.dirR=dirR.Xp
-      elseif(data.dirR==dirR.Xn)then
-          data.dirR=dirR.Zp
-      elseif(data.dirR==dirR.Zn)then
-          data.dirR=dirR.Xn
+      if(data.dir==dir.Xp)then
+          data.dir=dir.Zn
+      elseif(data.dir==dir.Zp)then
+          data.dir=dir.Xp
+      elseif(data.dir==dir.Xn)then
+          data.dir=dir.Zp
+      elseif(data.dir==dir.Zn)then
+          data.dir=dir.Xn
       end    
     end
   end  
@@ -485,9 +483,15 @@ function InventoryFromToEnderChest(takeOut,
    
 end
 
-function building()
-
-
+function printCoordinates()
+  print("X "..
+        data.position.x .. "Y "  .. 
+        data.position.y .. "Z "  .. 
+        data.position.z .. "DIR " ..
+        data.dir
+        )
+        
+  print()
 end   
 
 
