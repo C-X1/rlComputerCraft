@@ -52,42 +52,54 @@ function getOption()
 end
 
 local function main()
-  --check for disk
-  --check for missile
 
-  turtle.suckUp()
-
-  --check for disk
-  --check for missile
-
-  turtle.select(1)
-  turtle.dropUp() 
-
-  x=getInteger("X")
-  z=getInteger("Z")
-  y=getInteger("Det. Height:")
+  while true do
+    --check for disk
+    --check for missile
   
-  print("Coordinates are:")
+    turtle.suckUp()
+  
+    --check for disk
+    --check for missile
+  
+    turtle.select(1)
+    turtle.dropUp() 
+  
+    x=getInteger("X")
+    z=getInteger("Z")
+    y=getInteger("Det. Height:")
     
-  ok=getYesNo(x .. " " .. z .. " (" .. y .. ") Correct?")
-  
-  targetData.x=x
-  targetData.y=y
-  targetData.z=z
-  
-  
-  print("Writing disk and sending it")
-  
-  save(targetData,"disk/target")
-  
-  --check for disk
-  --check for missile
-  
-  turtle.suckUp()
-  turtle.dropDown()
-  turtle.select(1)
-  turtel.dropDown()
-  
+    print("Coordinates are:")
+      
+    ok=getYesNo(x .. " " .. z .. " (" .. y .. ") Correct?")
+    if(ok==true)then
+        
+      targetData.x=x
+      targetData.y=y
+      targetData.z=z
+      
+      
+      print("Writing disk and sending it")
+      
+      if(fs.exists("disk"))then
+        save(targetData,"disk/target")
+        -- check for missile
+        -- check slot  
+        turtle.suckUp()
+      	turtle.dropDown()
+      	turtle.select(1)
+      	turtel.dropDown()
+        
+      else
+        print("No Disk found in drive!")
+      end
+      
+
+    
+    end
+
+  end
+
 end
 
 main()
