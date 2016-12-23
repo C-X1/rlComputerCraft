@@ -77,6 +77,7 @@ local function main()
         if(state==s.init)then
             peripheral.call("top","setFrequency",randomNumber(4))   
             term.clear() 
+            term.setCursorPos(1,1)
             print("Waiting for disk.")
             state=s.no_disk
         elseif(state==s.no_disk)then
