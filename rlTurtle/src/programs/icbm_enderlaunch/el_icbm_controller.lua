@@ -85,6 +85,10 @@ local function main()
         elseif(state==s.disk_load)then
             local statusString=""
             local err=false
+            if(fs.exists("disk/err"))then
+              fs.delete("disk/err")
+            end
+            
             if(fs.exists("disk/target"))then
               print("Reading target file...")
               local targetData=load("disk/target")
