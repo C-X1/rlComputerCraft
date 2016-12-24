@@ -65,6 +65,10 @@ end
 local function identKnownComponents(rawName)
   id=knownComponents.unknown
 
+  if(rawName==nil)then
+    return id
+  end
+
   if string.find(rawName,knownComponentsStrings.missile,1,true)==1 then
     return knownComponents.missile
   elseif rawName == knownComponentsStrings.floppy then
@@ -74,6 +78,7 @@ local function identKnownComponents(rawName)
   else
     return knownComponents.unknown 
   end  
+  
   
   return id
 end
@@ -93,13 +98,18 @@ local function updateSlotState()
     else
       data.slot2=knownComponents.nothing
     end
+    
 end
  
 
 local function main()
+  state=s.waitForChest
+    
+
   while  true  do
     updateSlotState()
-    
+    print("Slots: " .. data.slot1 .. " " .. data.slot2)
+    print("State: " .. state)    
     
     if(state==s.waitForChest)then
       if(data.slot1 == knownComponents.missile and data.slot2 == knownComponents.floppy)
@@ -115,13 +125,14 @@ local function main()
     elseif(state==s.loadMissile)then
        turtle.select(1)
        turtle.dropUp()
+       state=s.insertDisk
     elseif(state==s.insertDisk)then
        turtle.select(2)
        turtle.drop()
-       state=s.waitState
+       state=s.waitReturnState
     elseif(state==s.waitReturnState)then
        if(fs.exists("disk"))then       
-          if(fs.exits("disk/err"))then
+          if(fs.exists("disk/err"))then
             rs.setOutput("top",true)
             state=s.err
           elseif(fs.exits("disk/ready"))then
