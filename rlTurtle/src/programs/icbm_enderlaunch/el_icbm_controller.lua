@@ -107,7 +107,10 @@ local function main()
                       print("Checking system...")
                       if(peripheral.call("top","canLaunch")==true) then   
                         print("Launch coordinates good, system ready...")
-                        peripheral.call("top","setFrequency",randomNumber(4))   
+                        peripheral.call("top","setFrequency",randomNumber(4))  
+                        f=fs.open("disk/ready","w")
+                        f.write("rdy") 
+                        f.close()
                       else
                         statusString= "Launch not possible - check system or coordinates"
                         err=true
