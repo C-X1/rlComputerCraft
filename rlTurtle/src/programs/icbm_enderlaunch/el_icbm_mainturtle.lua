@@ -65,8 +65,6 @@ end
 local function identKnownComponents(rawName)
   id=knownComponents.unknown
 
-  print(rawName)
-
   if string.find(rawName,knownComponentsStrings.missile,1,true)==1 then
     return knownComponents.missile
   elseif rawName == knownComponentsStrings.floppy then
