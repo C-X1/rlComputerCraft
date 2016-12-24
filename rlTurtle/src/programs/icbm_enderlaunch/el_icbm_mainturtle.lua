@@ -135,13 +135,13 @@ local function main()
           if(fs.exists("disk/err"))then
             rs.setOutput("top",true)
             state=s.err
-          elseif(fs.exits("disk/ready"))then
+          elseif(fs.exists("disk/ready"))then
             fs.delete("disk/ready")
             local f=fs.open("disk/launch","w")
             f.write("")
             f.close()
             state=s.launch
-          elseif(fs.exits("disk/manualRdy"))then
+          elseif(fs.exists("disk/manualRdy"))then
             fs.delete("disk/manualRdy")
             state=s.manualLaunch
           end
