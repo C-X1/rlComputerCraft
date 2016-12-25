@@ -1,4 +1,4 @@
-
+--ENDER ICBM COMMAND CREATOR
 function save(table,name)
   local file = fs.open(name,"w")
   file.write(textutils.serialize(table))

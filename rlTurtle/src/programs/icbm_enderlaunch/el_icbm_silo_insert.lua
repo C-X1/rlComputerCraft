@@ -1,3 +1,4 @@
+--SILO INSERT
 local function main()
   peripheral.call("bottom","turnOn")
   while true do
@@ -8,7 +9,7 @@ local function main()
       print("load silo")
       turtle.dropUp()  
     end
-    os.sleep(1)
+    os.sleep(0.1)
     term.clear()
   end
 end

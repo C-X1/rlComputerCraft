@@ -1,3 +1,4 @@
+--ENDER ICBM MAIN
 os.loadAPI("ocs/apis/sensor")
 
 local knownComponents=
@@ -19,7 +20,8 @@ local knownComponentsStrings=
 local data=
 {
   slot1=0,
-  slot2=0
+  slot2=0,
+  silo=0,
 }
 
 local main_states=
@@ -28,11 +30,12 @@ local main_states=
   waitForChest=0,
   getFromChest=1,
   loadMissile=2,
-  insertDisk=3,
-  waitReturnState=4,
+  waitLoaded=3,
+  insertDisk=4,
+  waitReturnState=5,
   
-  launch=5,
-  manualLaunch=6,
+  launch=6,
+  manualLaunch=7,
 }
 
 local s=main_states
@@ -86,6 +89,7 @@ end
 local function updateSlotState()
     local slot1=getInventorySlot("left","0,-1,0",1)
     local slot2=getInventorySlot("left","0,-1,0",2)
+    local silo=getInventorySlot("left","0,2,0",1)
 
     if(slot1~=nil)then
       data.slot1=identKnownComponents(slot1.RawName)
@@ -99,6 +103,12 @@ local function updateSlotState()
       data.slot2=knownComponents.nothing
     end
     
+    if(silo~=nil)then
+      data.silo=identKnownComponents(silo.RawName)
+    else
+      data.silo=knownComponents.nothing
+    end
+    
 end
  
 
@@ -108,7 +118,7 @@ local function main()
 
   while  true  do
     updateSlotState()
-    print("Slots: " .. data.slot1 .. " " .. data.slot2)
+    print("Slots: " .. data.slot1 .. " " .. data.slot2 .. " " .. data.silo)
     print("State: " .. state)    
     
     if(state==s.waitForChest)then
@@ -123,9 +133,14 @@ local function main()
        turtle.suckDown()
        state=s.loadMissile
     elseif(state==s.loadMissile)then
+       rs.setOutput("top",false)
        turtle.select(1)
        turtle.dropUp()
-       state=s.insertDisk
+       state=s.waitLoaded
+    elseif(state==s.waitLoaded)then
+       if(data.silo==knownComponents.missile)then
+          state=s.insertDisk
+       end
     elseif(state==s.insertDisk)then
        turtle.select(2)
        turtle.drop()
@@ -145,8 +160,26 @@ local function main()
             fs.delete("disk/manualRdy")
             state=s.manualLaunch
           end
-       
+     
        end   
+    elseif(state==s.err)then
+      rs.setOutput("top",true)
+      turtle.suck() --get disk first
+      turtle.dropDown() --drop disk
+      turtle.suckUp() --get missile
+      turtle.dropDown() --drop missile
+    elseif(state==s.launch)then
+      if(data.silo~=knownComponents.missile)then
+        turtle.suck()
+        turtle.dropDown()
+        state=s.waitForChest
+      end
+    elseif(state==s.manualLaunch)then
+      if(data.silo~=knownComponents.missile)then
+        turtle.suck()
+        turtle.dropDown()
+        state=s.waitForChest
+      end 
     else
     
     end
