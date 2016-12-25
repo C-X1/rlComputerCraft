@@ -1,6 +1,6 @@
 local file_links=
 {
-   ["main_turtle"]="https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_mainturtle.lua"
+   ["startup"]="https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_mainturtle.lua"
   ,["loader_turtle"]= "https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_silo_insert.lua"
   ,["launcher_controller"]="https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_controller.lua"  
   ,["pc_turtle_install"]="https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_sw_install.lua"
@@ -145,10 +145,7 @@ local function main()
     end
   end
   
-  if(fs.exists("startup"))then
-    fs.delete("startup")
-  end
-  fs.move("main_turtle","startup")
+
   --remove disk from drive
   turtle.suck()
   turtle.dropDown()
