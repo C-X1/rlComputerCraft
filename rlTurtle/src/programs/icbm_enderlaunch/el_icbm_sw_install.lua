@@ -2,6 +2,7 @@ local function main()
     
   sf=fs.open("disk/StationName","r")
   local stationName=sf.readAll()
+  print("Station name is: "..stationName)
   sf.close()
   
     
