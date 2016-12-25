@@ -57,13 +57,13 @@ local function main()
     --check for disk
     --check for missile
   
-    turtle.suckUp()
+    --turtle.suckUp()
   
     --check for disk
     --check for missile
   
-    turtle.select(1)
-    turtle.dropUp() 
+    --turtle.select(1)
+    --turtle.dropUp() 
   
     x=getInteger("X")
     z=getInteger("Z")
@@ -85,10 +85,10 @@ local function main()
         save(targetData,"disk/target")
         -- check for missile
         -- check slot  
-        turtle.suckUp()
-      	turtle.dropDown()
-      	turtle.select(1)
-      	turtel.dropDown()
+        --turtle.suckUp()
+      	--turtle.dropDown()
+      	--turtle.select(1)
+      	--turtel.dropDown()
         
       else
         print("No Disk found in drive!")
