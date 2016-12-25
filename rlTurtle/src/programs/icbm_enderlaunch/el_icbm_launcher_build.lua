@@ -145,7 +145,10 @@ local function main()
     end
   end
   
-  fs.move("main_turtle","startup")
+  if(fs.exists("startup"))then
+  --  fs.delete("startup")
+  end
+  --fs.move("main_turtle","startup")
   --remove disk from drive
   turtle.suck()
   turtle.dropDown()
