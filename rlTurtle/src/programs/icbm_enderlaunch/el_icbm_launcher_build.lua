@@ -152,7 +152,9 @@ local function main()
   --remove disk from drive
   turtle.suck()
   turtle.dropDown()
+  peripheral.call("top","turnOn")
   shell.run("startup") 
+  
        
   
 end
