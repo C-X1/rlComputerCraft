@@ -8,6 +8,7 @@ local file_links=
    ["main_turtle"]="https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_mainturtle.lua"
   ,["loader_turtle"]= "https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_silo_insert.lua"
   ,["launcher_controller"]="https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_controller.lua"  
+  ,["pc_turtle_install"]="https://raw.githubusercontent.com/C-X1/rlComputerCraft/master/rlTurtle/src/programs/icbm_enderlaunch/el_icbm_sw_install.lua"
 }
 local function main()
 
@@ -62,6 +63,8 @@ local function main()
        turtle.place()
     elseif(i==2)then -- insert disk
        turtle.drop()
+       os.sleep(1)
+       fs.copy("pc_turtle_install","disk/startup") 
        -- @todo write startup file for turtle and pc
        
     elseif(i==3)then -- place turtle  
