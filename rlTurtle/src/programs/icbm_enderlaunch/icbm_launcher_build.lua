@@ -12,7 +12,7 @@ local file_links=
 local function main()
 
   print("Need encoded ender chest with items in this order:")
-  print("- Floppy Disk Drive , - Floppy Disk")
+  print("- Disk Drive , - Floppy Disk")
   print("- Turtle (plain Turtle)")
   print("- any solid building block")
   print("- Computer")
@@ -97,11 +97,13 @@ local function main()
        turtle.transferTo(16)
     elseif(i==10)then --place sensor
        turtle.turnLeft()
+       turtle.turnLeft()
        turtle.place()
     elseif(i==11)then -- insert proximity sensor card
        os.sleep(1)
        turtle.drop()
-       turtle.turnRight()
+       turtle.turnLeft()
+       turtle.turnLeft()
     end
   end
   
