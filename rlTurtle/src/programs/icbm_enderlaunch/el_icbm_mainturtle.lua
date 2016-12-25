@@ -168,6 +168,7 @@ local function main()
       turtle.dropDown() --drop disk
       turtle.suckUp() --get missile
       turtle.dropDown() --drop missile
+      state=s.waitForChest
     elseif(state==s.launch)then
       if(data.silo~=knownComponents.missile)then
         turtle.suck()
