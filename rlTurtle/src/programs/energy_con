@@ -1,0 +1,30 @@
+os.loadAPI("rlOccSense")
+S=rlOccSense
+monitor=peripheral.wrap("left")
+term.redirect(monitor)
+
+S.printInRange("back")
+
+while(true)
+do
+  
+
+  energy_percent=math.ceil(S.getSensorValue("back","PowerPercentFull",2,-6,-1)*100)/100
+   
+  if(energy_percent<25)then
+    term.setBackgroundColor(colors.red)
+    redstone.setOutput("right", false)
+  
+  elseif(energy_percent>50)
+  then
+    term.setBackgroundColor(colors.green)
+    redstone.setOutput("right", true)
+  end
+  
+  term.clear()
+  term.setCursorPos(1,1)
+  print("BATTERY")
+  print(energy_percent)
+  
+  sleep(1)
+end
